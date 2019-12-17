@@ -44,11 +44,13 @@ public class UserController {
 		try {
 			jsonObj = new JSONObject(str);
 			String username = jsonObj.getString("username");
+			String firstname = jsonObj.getString("firstname");
+			String lastname = jsonObj.getString("lastname");
 			String email = jsonObj.getString("email");
 			String password = jsonObj.getString("password");
 			String tip = jsonObj.getString("tip");
 
-			userDAO.insera(username, email, password, tip);
+			userDAO.insera(username,firstname,lastname, email, password, tip);
 		}
 		catch(JSONException e) {
 			e.printStackTrace();

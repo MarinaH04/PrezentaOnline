@@ -34,6 +34,12 @@ public class User {
 	@Column(name="username")
 	private String username;
 	
+	@Column(name="firstname")
+	private String firstname;
+	
+	@Column(name="lastname")
+	private String lastname;
+	
 	@Column(name="password")
 	private String password;
 	
@@ -64,9 +70,27 @@ public class User {
 	public String getUsername() {
 		return username;
 	}
+	
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getPassword() {
@@ -109,11 +133,14 @@ public class User {
 	public void add_curs(Curs cursuri) {
 		curs.add(cursuri);
 	}
+
 	@Override
 	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", user_type=" + userType + ", curs=" + curs.size() + "]";
+		return "User [user_id=" + user_id + ", username=" + username + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", password=" + password + ", email=" + email + ", userType=" + userType + ", curs=" + curs.size()
+				+ "]";
 	}
+
 	
 	
 }

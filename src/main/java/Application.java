@@ -21,9 +21,9 @@ public class Application {
 		UserTypeDAO usertDAO = appContext.getBean(UserTypeDAO.class);
 		CursDAO cursDAO = appContext.getBean(CursDAO.class);
 //	usertDAO.insert("Student");
-//	userDAO.insera("Razvan", "razv@yahoo.com", "1234", "Student");
-//	cursDAO.insert(1,"Matematica");
-		//userDAO.update("Razvan","Economie");
+//	userDAO.insera("Criss05","Cristina","Lorinczi", "crisslo90@yahoo.com", "557095", "Student");
+//	cursDAO.insert(2,"Matematica");
+//	userDAO.update("Criss05","Matematica");
 
 		try {
 
@@ -69,7 +69,7 @@ public class Application {
 
 		// System.out.println(useri.toString());
 
-		System.out.println(userDAO.login("aaa", "1234").toString());
+		System.out.println(userDAO.login("AndreB", "5678").toString());
 
 	}
 }

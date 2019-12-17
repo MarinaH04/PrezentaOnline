@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.hibernate.Query;
 
 import com.commons.LoginDTO;
+import com.commons.UserDTO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
@@ -31,11 +32,13 @@ public class UserDAOImpl implements UserDAO {
 	public UserDAO userDAO;
 	
 
-	public void insera(String username, String email, String password, String tip) {
+	public void insera(String username, String firstname, String lastname, String email, String password, String tip) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		User user = new User();
 		user.setUsername(username);
+		user.setFirstname(firstname);
+		user.setLastname(lastname);
 		user.setEmail(email);
 		user.setPassword(password);
 		UserType usert = null;
@@ -121,15 +124,16 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	
-	public LoginDTO login(String username, String password) {
+	public UserDTO login(String username, String password) {
 		Session session = sessionFactory.openSession();
 		User user_login = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
-		LoginDTO userlogin = new LoginDTO();
+		UserDTO userlogin = new UserDTO();
 		if(user_login!=null) {
 			
 			userlogin.setUsername(user_login.getUsername());
 			if((user_login.getPassword()).equals(password)) {
-				userlogin.setPassword(user_login.getPassword());
+				userlogin.setFirstname(user_login.getFirstname());
+				userlogin.setLastname(user_login.getLastname());
 			}
 			else System.out.println("Parola incorecta");
 		}
