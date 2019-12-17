@@ -69,7 +69,7 @@ public class Application {
 
 		// System.out.println(useri.toString());
 
-		
+		System.out.println(userDAO.login("aaa", "1234").toString());
 
 	}
 }

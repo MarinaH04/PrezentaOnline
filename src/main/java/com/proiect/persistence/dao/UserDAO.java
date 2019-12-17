@@ -3,6 +3,7 @@ package com.proiect.persistence.dao;
 import java.util.List;
 import java.util.Set;
 
+import com.commons.LoginDTO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
 
@@ -15,4 +16,5 @@ public interface UserDAO {
 	public void saveObj(Object object);
 	public void update(String username, String denumire);
 	public Set<Curs> getCourses(int uid);
+	public LoginDTO login(String username, String password);
 }

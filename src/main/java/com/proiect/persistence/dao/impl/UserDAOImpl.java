@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.hibernate.Query;
+
+import com.commons.LoginDTO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
@@ -25,6 +27,9 @@ import com.proiect.persistence.entity.UserType;
 public class UserDAOImpl implements UserDAO {
 	@Autowired
 	public SessionFactory sessionFactory;
+	
+	public UserDAO userDAO;
+	
 
 	public void insera(String username, String email, String password, String tip) {
 		Session session = sessionFactory.openSession();
@@ -113,6 +118,24 @@ public class UserDAOImpl implements UserDAO {
 			System.out.println("Exception in get courses: "+ e.getMessage());
 		}
 		return user_curs;
+	}
+	
+	
+	public LoginDTO login(String username, String password) {
+		Session session = sessionFactory.openSession();
+		User user_login = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
+		LoginDTO userlogin = new LoginDTO();
+		if(user_login!=null) {
+			
+			userlogin.setUsername(user_login.getUsername());
+			if((user_login.getPassword()).equals(password)) {
+				userlogin.setPassword(user_login.getPassword());
+			}
+			else System.out.println("Parola incorecta");
+		}
+		else System.out.println("Username inexistent");	
+		
+		return userlogin;
 	}
 
 }
