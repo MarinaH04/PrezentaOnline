@@ -3,15 +3,11 @@ package com.proiect.persistence.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -28,11 +24,7 @@ public class Curs {
 	@Column(name = "denumire")
 	private String denumire;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH,
-			CascadeType.PERSIST }, targetEntity = User.class)
-	@JoinTable(name = "user_curs", joinColumns = {
-			@JoinColumn(name = "user_id", insertable = true, updatable = true) }, inverseJoinColumns = {
-					@JoinColumn(name = "curs_id", insertable = true, updatable = true) })
+	@ManyToMany(mappedBy="curs")
 	 @JsonBackReference
 	private Set<User> user = new HashSet<User>();
 
