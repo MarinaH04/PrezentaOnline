@@ -90,5 +90,11 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>Commons</groupId>
+			<artifactId>Commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 </project>
