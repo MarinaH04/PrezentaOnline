@@ -70,6 +70,7 @@ public class Application {
 		// System.out.println(useri.toString());
 
 		System.out.println(userDAO.login("AndreB", "5678").toString());
+		userDAO.usercourse("Marina");
 
 	}
 }

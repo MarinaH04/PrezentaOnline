@@ -15,6 +15,7 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.commons.UserDTO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.User;
 
@@ -34,6 +35,25 @@ public class UserController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUsers(@PathParam("username") String username){
 		return userDAO.getUserByUsername(username);
+	}
+	
+	@POST
+	@Path("/DTO")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserDTO loginDTO(String str) {
+		JSONObject jsonObj;
+		String username="";
+		String password="";
+		
+		try {
+			jsonObj = new JSONObject(str);
+			 username = jsonObj.getString("username");
+			password = jsonObj.getString("password");
+		
+		}
+		catch(JSONException e) {}
+		return userDAO.login(username, password);
+		
 	}
 	
 	@POST
