@@ -1,6 +1,7 @@
 package com.proiect.persistence.dao.impl;
 
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -98,6 +99,20 @@ public class UserDAOImpl implements UserDAO {
 		session.saveOrUpdate(object);
 		session.getTransaction().commit();
 		session.close();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Set<Curs> getCourses(int uid){
+		Session session = sessionFactory.openSession();
+		Set<Curs> user_curs = new HashSet<>();
+		Query q = session.createQuery("SELECT c FROM User u JOIN u.curs c WHERE u.user_id=:uid");
+		q.setParameter("uid", uid);
+		try {
+			user_curs.addAll(q.list());
+		} catch (Exception e) {
+			System.out.println("Exception in get courses: "+ e.getMessage());
+		}
+		return user_curs;
 	}
 
 }

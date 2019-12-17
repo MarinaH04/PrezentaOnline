@@ -1,9 +1,14 @@
 package com.proiect.persistence.dao.impl;
-import java.util.List;
 
+import com.proiect.persistence.entity.User;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -62,6 +67,20 @@ public class CursDAOImpl implements CursDAO{
 		 curs = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", denumire)).uniqueResult();
 	
 		return curs;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Set<User> getUsers(Integer cid){
+		Session session = sessionFactory.openSession();
+		Set<User> user_curs = new HashSet<>();
+		Query q = session.createQuery("SELECT u FROM Curs c JOIN c.user u WHERE c.curs_id=:cid");
+		q.setParameter("cid", cid);
+		try {
+			user_curs.addAll(q.list());
+		} catch (Exception e) {
+			System.out.println("Exception in get courses: "+ e.getMessage());
+		}
+		return user_curs;
 	}
 
 }
