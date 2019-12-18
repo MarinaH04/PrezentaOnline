@@ -16,6 +16,8 @@ import org.codehaus.jettison.json.JSONObject;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.commons.UserDTO;
+import com.proiect.business.UserManager;
+import com.proiect.business.impl.UserManagerImpl;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.User;
 
@@ -23,6 +25,10 @@ import com.proiect.persistence.entity.User;
 public class UserController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 	UserDAO userDAO = context.getBean(UserDAO.class);
+	UserManager userManager;
+	
+	
+	UserManagerImpl userManag = new UserManagerImpl();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -35,6 +41,13 @@ public class UserController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUsers(@PathParam("username") String username){
 		return userDAO.getUserByUsername(username);
+	}
+	
+	@GET
+	@Path("/DTOusername/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public UserDTO getUs(@PathParam("username") String username) {
+		return userManag.getUsers(username);
 	}
 	
 	@POST

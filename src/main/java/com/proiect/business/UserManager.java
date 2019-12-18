@@ -1,5 +1,7 @@
 package com.proiect.business;
 
-public interface UserManager {
+import com.commons.UserDTO;
 
+public interface UserManager {
+	public UserDTO getUsers(String username);
 }

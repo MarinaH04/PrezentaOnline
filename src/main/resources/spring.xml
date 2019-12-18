@@ -16,7 +16,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd ">
 		location="classpath:database.properties" />
 
 	<context:component-scan
-		base-package="com.proiect.persistence.dao"></context:component-scan>
+		base-package="com.proiect.persistence.dao, com.proiect.business"></context:component-scan>
 	<tx:annotation-driven />
 
 
@@ -55,6 +55,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd ">
 		</property>
 	</bean>
 
+	
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />

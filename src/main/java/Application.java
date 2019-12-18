@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.proiect.business.impl.UserManagerImpl;
 import com.proiect.persistence.dao.CursDAO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.dao.UserTypeDAO;
@@ -13,8 +14,11 @@ import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
 import com.proiect.persistence.entity.UserType;
 
+import com.proiect.business.*;
+
 public class Application {
 	public static void main(String[] args) {
+	
 		@SuppressWarnings("resource")
 		final ApplicationContext appContext = new ClassPathXmlApplicationContext("spring.xml");
 		UserDAO userDAO = appContext.getBean(UserDAO.class);
@@ -71,6 +75,7 @@ public class Application {
 
 		System.out.println(userDAO.login("AndreB", "5678").toString());
 		userDAO.usercourse("Marina");
-
+		UserManagerImpl us = new UserManagerImpl();
+		System.out.println(us.getUsers("Marina04"));
 	}
 }
