@@ -2,8 +2,6 @@ package com.proiect.persistence.dao;
 
 import java.util.List;
 import java.util.Set;
-
-import com.commons.UserCursDTO;
 import com.commons.UserDTO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
