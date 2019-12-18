@@ -24,8 +24,9 @@ import com.proiect.persistence.entity.User;
 @Path("/user")
 public class UserController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+	ClassPathXmlApplicationContext context2 = new ClassPathXmlApplicationContext("spring-dto.xml");
 	UserDAO userDAO = context.getBean(UserDAO.class);
-	UserManager userManager;
+	UserManager userManager = context2.getBean(UserManager.class);
 	
 	
 	UserManagerImpl userManag = new UserManagerImpl();
@@ -47,7 +48,7 @@ public class UserController {
 	@Path("/DTOusername/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public UserDTO getUs(@PathParam("username") String username) {
-		return userManag.getUsers(username);
+		return userManager.getUsers(username);
 	}
 	
 	@POST
