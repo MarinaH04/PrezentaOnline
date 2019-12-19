@@ -14,7 +14,7 @@ import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
 import com.proiect.persistence.entity.UserType;
 
-import com.proiect.business.*;
+
 
 public class Application {
 	public static void main(String[] args) {
@@ -76,6 +76,6 @@ public class Application {
 		System.out.println(userDAO.login("AndreB", "5678").toString());
 		userDAO.usercourse("Marina");
 		UserManagerImpl us = new UserManagerImpl();
-		System.out.println(us.getUsers("Marina04"));
+		System.out.println(us.getUser("Marina04"));
 	}
 }

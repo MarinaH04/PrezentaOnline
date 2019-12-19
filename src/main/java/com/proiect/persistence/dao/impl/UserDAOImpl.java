@@ -16,9 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import org.hibernate.Query;
 
-import com.commons.LoginDTO;
 import com.commons.UserCursDTO;
-import com.commons.UserDTO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
@@ -125,16 +123,14 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	
-	public UserDTO login(String username, String password) {
+	public User login(String username, String password) {
 		Session session = sessionFactory.openSession();
 		User user_login = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
-		UserDTO userlogin = new UserDTO();
+		User userlogin = new User();
 		if(user_login!=null) {
 			
-			userlogin.setUsername(user_login.getUsername());
 			if((user_login.getPassword()).equals(password)) {
-				userlogin.setFirstname(user_login.getFirstname());
-				userlogin.setLastname(user_login.getLastname());
+				userlogin = user_login;
 			}
 			else System.out.println("Parola incorecta");
 		}
@@ -145,6 +141,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	public void usercourse(String username) {
 		Session session = sessionFactory.openSession();
+		@SuppressWarnings("unused")
 		User usercurs = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
 		UserCursDTO userDTO = new UserCursDTO();
 		userDTO.setUsername(username);

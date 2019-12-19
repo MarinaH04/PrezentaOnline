@@ -15,28 +15,21 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.commons.UserDTO;
-import com.proiect.business.UserManager;
-import com.proiect.business.impl.UserManagerImpl;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.User;
 
 @Path("/user")
 public class UserController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-	ClassPathXmlApplicationContext context2 = new ClassPathXmlApplicationContext("spring-dto.xml");
 	UserDAO userDAO = context.getBean(UserDAO.class);
-	UserManager userManager = context2.getBean(UserManager.class);
 	
-	
-	UserManagerImpl userManag = new UserManagerImpl();
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers() {
 		return userDAO.displayUsers();
 	}
-	
+
 	@GET
 	@Path("/{username}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -44,17 +37,11 @@ public class UserController {
 		return userDAO.getUserByUsername(username);
 	}
 	
-	@GET
-	@Path("/DTOusername/{username}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public UserDTO getUs(@PathParam("username") String username) {
-		return userManager.getUsers(username);
-	}
 	
 	@POST
 	@Path("/DTO")
 	@Produces(MediaType.APPLICATION_JSON)
-	public UserDTO loginDTO(String str) {
+	public User login(String str) {
 		JSONObject jsonObj;
 		String username="";
 		String password="";
