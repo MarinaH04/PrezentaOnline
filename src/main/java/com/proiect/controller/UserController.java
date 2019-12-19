@@ -1,4 +1,4 @@
-package com.proiect.persistence.controller;
+package com.proiect.controller;
 
 import javax.ws.rs.core.MediaType;
 

@@ -15,7 +15,7 @@
 
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>com.proiect.persistence.controller</param-value>
+			<param-value>com.proiect.controller</param-value>
 		</init-param>
 		<init-param>
 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
