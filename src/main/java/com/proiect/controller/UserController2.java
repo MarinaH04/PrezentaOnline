@@ -15,6 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.commons.UserCursDTO;
 import com.commons.UserDTO;
+import com.commons.UserTypeDTO;
 import com.proiect.business.UserManager;
 
 
@@ -40,6 +41,12 @@ public class UserController2 {
 		@Produces(MediaType.APPLICATION_JSON)
 		public UserCursDTO getUserCurs(@PathParam("username") String username) {
 			return userManager.getUserCurs(username);
+		}
+		@GET
+		@Path("usertype/{username}")
+		@Produces(MediaType.APPLICATION_JSON)
+		public UserTypeDTO getUserTypes(@PathParam("username") String username) {
+			return userManager.getUserTypeDTO(username);
 		}
 		
 		@POST

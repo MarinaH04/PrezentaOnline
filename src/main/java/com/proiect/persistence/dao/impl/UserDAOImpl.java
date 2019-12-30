@@ -153,5 +153,12 @@ public class UserDAOImpl implements UserDAO {
 		userDTO.setCourses(courses2);
 		
 	}
-
+	public UserType getUserType(String username) {
+		Session session = sessionFactory.openSession();
+		UserType usert = null;
+		Query q = session.createQuery("SELECT t FROM User u JOIN u.userType t where u.username=:username");
+		q.setParameter("username", username);
+		usert = (UserType) q.uniqueResult();
+		return usert;
+	}
 }

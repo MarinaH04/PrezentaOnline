@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
+import com.proiect.persistence.entity.UserType;
 
 
 public interface UserDAO {
@@ -16,4 +17,5 @@ public interface UserDAO {
 	public Set<Curs> getCourses(int uid);
 	public User login(String username, String password);
 	public void usercourse(String username);
+	public UserType getUserType(String username);
 }

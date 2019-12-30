@@ -75,7 +75,8 @@ public class Application {
 
 		System.out.println(userDAO.login("AndreB", "5678").toString());
 		userDAO.usercourse("Marina");
-		UserManagerImpl us = new UserManagerImpl();
-		System.out.println(us.getUser("Marina04"));
+//		UserManagerImpl us = new UserManagerImpl();
+//		System.out.println(us.getUser("Marina04"));
+		System.out.println(userDAO.getUserType("Marina04"));
 	}
 }
