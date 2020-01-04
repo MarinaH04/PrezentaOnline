@@ -24,10 +24,10 @@ public class Application {
 		UserDAO userDAO = appContext.getBean(UserDAO.class);
 		UserTypeDAO usertDAO = appContext.getBean(UserTypeDAO.class);
 		CursDAO cursDAO = appContext.getBean(CursDAO.class);
-//	usertDAO.insert("Student");
-//	userDAO.insera("Criss05","Cristina","Lorinczi", "crisslo90@yahoo.com", "557095", "Student");
+//	usertDAO.insert("Admin");
+//	userDAO.insera("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
 //	cursDAO.insert(2,"Matematica");
-//	userDAO.update("Criss05","Matematica");
+//	userDAO.update("MorariuP","Matematica");
 
 		try {
 
@@ -69,12 +69,13 @@ public class Application {
 		for(User user1:users) {
 			System.out.println(user1.toString());
 		}
+		
 		//userDAO.deleteUser(4);
 
 		// System.out.println(useri.toString());
 
-		System.out.println(userDAO.login("AndreB", "5678").toString());
-		userDAO.usercourse("Marina");
+		System.out.println("Logare: "+userDAO.login("AndreB", "5678").toString());
+
 //		UserManagerImpl us = new UserManagerImpl();
 //		System.out.println(us.getUser("Marina04"));
 		System.out.println(userDAO.getUserType("Marina04"));

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import org.hibernate.Query;
 
 import com.commons.UserCursDTO;
+import com.commons.UserInsertDTO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
@@ -43,6 +44,26 @@ public class UserDAOImpl implements UserDAO {
 		UserType usert = null;
 		Query q = sessionFactory.getCurrentSession().createQuery("FROM UserType WHERE tip=:tip");
 		q.setParameter("tip", tip);
+		usert = (UserType) q.uniqueResult();
+		if (usert != null) {
+			user.setUserType(usert);
+			session.save(user);
+			tx.commit();
+		}
+		session.close();
+	}
+	public void insert(UserInsertDTO userDTO) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		User user = new User();
+		user.setUsername(userDTO.getUsername());
+		user.setFirstname(userDTO.getFirstname());
+		user.setLastname(userDTO.getLastname());
+		user.setEmail(userDTO.getEmail());
+		user.setPassword(userDTO.getPassword());
+		UserType usert = null;
+		Query q = sessionFactory.getCurrentSession().createQuery("FROM UserType WHERE tip=:tip");
+		q.setParameter("tip", userDTO.getTip());
 		usert = (UserType) q.uniqueResult();
 		if (usert != null) {
 			user.setUserType(usert);

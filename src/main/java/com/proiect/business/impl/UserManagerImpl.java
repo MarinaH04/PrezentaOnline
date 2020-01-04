@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.commons.CursDTO;
 import com.commons.UserCursDTO;
 import com.commons.UserDTO;
+import com.commons.UserInsertDTO;
 import com.commons.UserTypeDTO;
 import com.proiect.business.UserManager;
 import com.proiect.persistence.dao.CursDAO;
@@ -95,6 +96,17 @@ public class UserManagerImpl implements UserManager {
 		usert.setUsername(username);
 		usert.setTip(userType.getTip());
 		return usert;
+		
+	}
+	public void insertDTO(String username, String firstname, String lastname, String email, String password, String tip) {
+		UserInsertDTO usert = new UserInsertDTO();
+		usert.setUsername(username);
+		usert.setFirstname(firstname);
+		usert.setLastname(lastname);
+		usert.setEmail(email);
+		usert.setPassword(password);
+		usert.setTip(tip);
+		userDAO.insert(usert);
 		
 	}
 }
