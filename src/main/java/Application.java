@@ -27,7 +27,7 @@ public class Application {
 //	usertDAO.insert("Admin");
 //	userDAO.insera("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
 //	cursDAO.insert(2,"Matematica");
-//	userDAO.update("MorariuP","Matematica");
+	userDAO.update("ManiutiuR","Economie");
 
 		try {
 
@@ -79,5 +79,9 @@ public class Application {
 //		UserManagerImpl us = new UserManagerImpl();
 //		System.out.println(us.getUser("Marina04"));
 		System.out.println(userDAO.getUserType("Marina04"));
+		List<User> userii = userDAO.displayStudents("Admin");
+		for(User user2:userii) {
+			System.out.println(user2.toString());
+		}
 	}
 }

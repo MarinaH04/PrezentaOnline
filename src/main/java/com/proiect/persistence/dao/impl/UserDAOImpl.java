@@ -1,6 +1,7 @@
 package com.proiect.persistence.dao.impl;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -97,6 +98,18 @@ public class UserDAOImpl implements UserDAO {
 			result = session.createQuery("FROM User").list();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
+		}
+		return result;
+	}
+	@SuppressWarnings("unchecked")
+	public List<User> displayStudents(String tip){
+		Session session = this.sessionFactory.openSession();
+		List<User> result = new ArrayList<User>();
+		Query q = session.createQuery("SELECT u FROM User u JOIN u.userType t where t.tip=:tip");
+		q.setParameter("tip", tip);
+		try {
+			result.addAll(q.list());
+		} catch (Exception e) {
 		}
 		return result;
 	}

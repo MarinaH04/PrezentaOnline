@@ -57,6 +57,19 @@ public class UserManagerImpl implements UserManager {
 		}
 		return usersDTO;
 	}
+	public List<UserDTO> getUsersByType(String tip){
+		List<User> users = userDAO.displayStudents(tip);
+		List<UserDTO> usersDTO = new ArrayList<UserDTO>();
+		for(User user1:users) {
+			UserDTO userDTO = new UserDTO();
+			userDTO.setUsername(user1.getUsername());
+			userDTO.setFirstname(user1.getFirstname());
+			userDTO.setLastname(user1.getLastname());
+			userDTO.setEmail(user1.getEmail());
+			usersDTO.add(userDTO);
+		}
+		return usersDTO;
+	}
 	
 	public CursDTO getCurs(String denumire){
 		Curs curs = cursDAO.getCursByDenumire(denumire);

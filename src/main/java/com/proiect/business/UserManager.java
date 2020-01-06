@@ -11,6 +11,7 @@ import com.commons.UserTypeDTO;
 public interface UserManager {
 	public UserDTO getUser(String username);
 	public List<UserDTO> getUsers();
+	public List<UserDTO> getUsersByType(String tip);
 	public CursDTO getCurs(String denumire);
 	public UserCursDTO getUserCurs(String username);
 	public UserDTO login(String username, String password);

@@ -37,7 +37,14 @@ public class UserController2 {
 	public UserDTO getUs(@PathParam("username") String username) {
 		return userManager.getUser(username);
 	}
-
+	
+	@GET
+	@Path("/byusertype/{tip}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<UserDTO> getUserByType(@PathParam("tip") String tip) {
+		return userManager.getUsersByType(tip);
+	}
+	
 	@GET
 	@Path("/course/{username}")
 	@Produces(MediaType.APPLICATION_JSON)

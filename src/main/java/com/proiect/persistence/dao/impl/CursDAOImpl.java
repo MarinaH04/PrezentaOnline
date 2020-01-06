@@ -83,4 +83,5 @@ public class CursDAOImpl implements CursDAO{
 		return user_curs;
 	}
 
+	
 }
