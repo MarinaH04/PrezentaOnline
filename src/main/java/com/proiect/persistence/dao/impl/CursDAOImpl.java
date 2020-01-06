@@ -70,11 +70,11 @@ public class CursDAOImpl implements CursDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public Set<User> getUsers(Integer cid){
+	public Set<User> getUsers(String course){
 		Session session = sessionFactory.openSession();
 		Set<User> user_curs = new HashSet<>();
-		Query q = session.createQuery("SELECT u FROM Curs c JOIN c.user u WHERE c.curs_id=:cid");
-		q.setParameter("cid", cid);
+		Query q = session.createQuery("SELECT u FROM Curs c JOIN c.user u WHERE c.denumire=:course");
+		q.setParameter("course", course);
 		try {
 			user_curs.addAll(q.list());
 		} catch (Exception e) {

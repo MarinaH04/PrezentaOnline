@@ -14,6 +14,6 @@ public interface CursDAO {
 	public Curs getCursByDenumire(String denumire);
 
 	public void saveObj(Object object);
-	public Set<User> getUsers(Integer cid);
+	public Set<User> getUsers(String course);
 
 }

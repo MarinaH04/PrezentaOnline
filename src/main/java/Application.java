@@ -64,8 +64,8 @@ public class Application {
 			System.out.println(curs1.toString());
 		}
 		
-		Set<User> users = cursDAO.getUsers(1);
-		System.out.println("La cursul cu id "+1+" participa urmatorii studenti: ");
+		Set<User> users = cursDAO.getUsers("Matematica");
+		System.out.println("La cursul cu id "+2+" participa urmatorii studenti: ");
 		for(User user1:users) {
 			System.out.println(user1.toString());
 		}

@@ -108,6 +108,17 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 
 	}
+	
+//	@SuppressWarnings("unchecked")
+//	public List<User> displayStudents(){
+//		Session session = this.sessionFactory.openSession();
+//		List<User> result = null;
+//		try {
+//			result = session.createQuery("").list();
+//		} catch (Exception e) {
+//		}
+//		return null;
+//	}
 
 	public void deleteUser(Integer user_id) {
 		Session session = sessionFactory.openSession();
@@ -167,10 +178,6 @@ public class UserDAOImpl implements UserDAO {
 		UserCursDTO userDTO = new UserCursDTO();
 		userDTO.setUsername(username);
 		Set<String> courses2 = new HashSet<String>();
-		//Set<Curs> courses = new HashSet<Curs>();
-//		for(Curs curs2:usercurs.getCurs()) {
-//			courses2.add(curs2.getDenumire());
-//		}
 		userDTO.setCourses(courses2);
 		
 	}

@@ -10,6 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.commons.CursDTO;
+import com.commons.CursUserDTO;
 import com.commons.UserCursDTO;
 import com.commons.UserDTO;
 import com.commons.UserInsertDTO;
@@ -78,6 +79,21 @@ public class UserManagerImpl implements UserManager {
 		}
 		usercurs.setCourses(coursesDTO);
 		return usercurs;
+	}
+	
+	public CursUserDTO getCursUser(String denumire) {
+		CursUserDTO cursuser = new CursUserDTO();
+		Curs curs = cursDAO.getCursByDenumire(denumire);
+		cursuser.setDenumire(curs.getDenumire());
+		Set<String> usersDTO = new HashSet<String>();
+		Set<User> users = cursDAO.getUsers(denumire);
+		for(User user1:users) {
+			String userDTO="";
+			userDTO = user1.getUsername();
+			usersDTO.add(userDTO);
+		}
+		cursuser.setUsers(usersDTO);
+		return cursuser;
 	}
 	
 	public UserDTO login(String username, String password) {
