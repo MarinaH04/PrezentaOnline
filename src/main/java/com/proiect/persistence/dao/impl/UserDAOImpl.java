@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 
 import org.hibernate.Query;
 
+import com.commons.StudProfDTO;
 import com.commons.UserCursDTO;
 import com.commons.UserInsertDTO;
 import com.proiect.persistence.dao.UserDAO;
@@ -74,17 +75,16 @@ public class UserDAOImpl implements UserDAO {
 		session.close();
 	}
 
-	public void update(String username, String denumire) {
+	public void update(StudProfDTO studprof) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		User user = null;
-		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
+		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", studprof.getUsername())).uniqueResult();
 		Curs cursuri = null;
-		 cursuri = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", denumire)).uniqueResult();
+		 cursuri = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", studprof.getDenumire())).uniqueResult();
 		Set<Curs> s = user.getCurs();
 		s.add(cursuri);
 		user.setCurs(s);
-		//session.saveOrUpdate(user);
 		tx.commit();
 		session.close();
 	}

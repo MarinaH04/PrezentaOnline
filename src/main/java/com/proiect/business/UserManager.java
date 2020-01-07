@@ -18,4 +18,5 @@ public interface UserManager {
 	public UserTypeDTO getUserTypeDTO(String username);
 	public void insertDTO(String username, String firstname, String lastname, String email, String password, String tip);
 	public CursUserDTO getCursUser(String denumire);
+	public void updateDTO(String username, String denumire);
 }

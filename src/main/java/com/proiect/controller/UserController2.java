@@ -102,5 +102,24 @@ public class UserController2 {
 		}
 		userManager.insertDTO(username, firstname, lastname, email, password, tip);
 	}
+	@POST
+	@Path("/update")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void createUserCurs(String str) {
+		JSONObject jsonObj;
+		String username="";
+		String denumire="";
+		try {
+			jsonObj = new JSONObject(str);
+			username = jsonObj.getString("username");
+			denumire = jsonObj.getString("denumire");
+			
+			
+		}
+		catch(JSONException e) {
+			e.printStackTrace();
+			}
+		userManager.updateDTO(username, denumire);
+	}
 
 }

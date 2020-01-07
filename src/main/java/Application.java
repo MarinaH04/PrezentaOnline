@@ -27,7 +27,7 @@ public class Application {
 //	usertDAO.insert("Admin");
 //	userDAO.insera("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
 //	cursDAO.insert(2,"Matematica");
-	userDAO.update("ManiutiuR","Economie");
+//	userDAO.update("ManiutiuR","Economie");
 
 		try {
 

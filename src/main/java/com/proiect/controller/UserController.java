@@ -87,7 +87,7 @@ public class UserController {
 			String username = jsonObj.getString("username");
 			String denumire = jsonObj.getString("denumire");
 			
-			userDAO.update(username, denumire);
+//			userDAO.update(username, denumire);
 		}
 		catch(JSONException e) {
 			e.printStackTrace();
