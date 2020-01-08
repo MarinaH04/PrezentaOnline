@@ -11,7 +11,7 @@ import com.proiect.persistence.entity.UserType;
 
 
 public interface UserDAO {
-	public void insera(String username, String firstname, String lastname, String email, String password, String tip);
+	
 	public List<User> displayUsers();
 	public List<User> displayStudents(String tip);
 	public void deleteUser(Integer user_id);

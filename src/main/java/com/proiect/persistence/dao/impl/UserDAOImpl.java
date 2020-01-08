@@ -19,6 +19,7 @@ import org.hibernate.Query;
 
 import com.commons.StudProfDTO;
 import com.commons.UserCursDTO;
+import com.commons.UserDTO;
 import com.commons.UserInsertDTO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.Curs;
@@ -33,27 +34,6 @@ public class UserDAOImpl implements UserDAO {
 	
 	public UserDAO userDAO;
 	
-
-	public void insera(String username, String firstname, String lastname, String email, String password, String tip) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		User user = new User();
-		user.setUsername(username);
-		user.setFirstname(firstname);
-		user.setLastname(lastname);
-		user.setEmail(email);
-		user.setPassword(password);
-		UserType usert = null;
-		Query q = sessionFactory.getCurrentSession().createQuery("FROM UserType WHERE tip=:tip");
-		q.setParameter("tip", tip);
-		usert = (UserType) q.uniqueResult();
-		if (usert != null) {
-			user.setUserType(usert);
-			session.save(user);
-			tx.commit();
-		}
-		session.close();
-	}
 	public void insert(UserInsertDTO userDTO) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -85,6 +65,20 @@ public class UserDAOImpl implements UserDAO {
 		Set<Curs> s = user.getCurs();
 		s.add(cursuri);
 		user.setCurs(s);
+		tx.commit();
+		session.close();
+	}
+	
+	public void edit(UserDTO userDTO) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		User user = null;
+		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", userDTO.getUsername())).uniqueResult();
+		user.setFirstname(userDTO.getUsername());
+		user.setLastname(userDTO.getLastname());
+		user.setEmail(userDTO.getEmail());
+		user.setPassword(userDTO.getPassword());
+		session.update(user);
 		tx.commit();
 		session.close();
 	}
