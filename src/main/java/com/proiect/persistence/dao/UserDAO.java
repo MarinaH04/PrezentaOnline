@@ -17,7 +17,7 @@ public interface UserDAO {
 	public void deleteUser(Integer user_id);
 	public User getUserByUsername(String username);
 	public void saveObj(Object object);
-	public void update(StudProfDTO studprof);
+//	public void update(StudProfDTO studprof);
 	public Set<Curs> getCourses(int uid);
 	public User login(String username, String password);
 	public void usercourse(String username);

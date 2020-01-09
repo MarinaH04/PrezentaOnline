@@ -5,28 +5,31 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.codehaus.jackson.annotate.JsonBackReference;
 
 
 @Entity
 @Table(name = "curs")
-public class Curs {
+public class Curs implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
+	@Column(name = "curs_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer curs_id;
 
 	@Column(name = "denumire")
 	private String denumire;
 
-	@ManyToMany(mappedBy="curs")
-	 @JsonBackReference
-	private Set<User> user = new HashSet<User>();
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.cs")
+	private Set<UserCurs> usercurs = new HashSet<UserCurs>();
 
 	public Curs() {
 	}
@@ -35,10 +38,7 @@ public class Curs {
 		this.denumire = denumire;
 	}
 
-	public void add_user(User useri) {
 
-		user.add(useri);
-	}
 
 	public Integer getCurs_id() {
 		return curs_id;
@@ -56,17 +56,19 @@ public class Curs {
 		this.denumire = denumire;
 	}
 
-	public Set<User> getUser() {
-		return user;
+	public Set<UserCurs> getUsercurs() {
+		return usercurs;
 	}
 
-	public void setUser(Set<User> user) {
-		this.user = user;
+
+	public void setUsercurs(Set<UserCurs> usercurs) {
+		this.usercurs = usercurs;
 	}
 
 	@Override
 	public String toString() {
-		return "Curs [curs_id=" + curs_id + ", denumire=" + denumire + ", user=" + user.size() + "]";
+		return "Curs [curs_id=" + curs_id + ", denumire=" + denumire + ", usercurs=" + usercurs + "]";
 	}
 
+	
 }

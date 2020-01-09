@@ -10,24 +10,20 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonManagedReference;
-
-
 
 
 @Entity
 @Table(name="user")
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class User {
+public class User implements java.io.Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
+	@Column(name="user_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer user_id;
 	
@@ -52,12 +48,8 @@ public class User {
 	private UserType userType;
 	
 	
-	@ManyToMany(fetch = FetchType.LAZY,cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST}, targetEntity = Curs.class)
-	@JoinTable(name = "user_curs", joinColumns = { 
-			@JoinColumn(name = "user_id", insertable=true, updatable=true) }, 
-			inverseJoinColumns = { @JoinColumn(name = "curs_id", insertable=true, updatable=true) })
-	@JsonManagedReference
-	private Set<Curs> curs = new HashSet<Curs>(); 
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "pk.user",cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	private Set<UserCurs> usercurs = new HashSet<UserCurs>(); 
 	
 	public Integer getUser_id() {
 		return user_id;
@@ -117,28 +109,19 @@ public class User {
 		this.userType = userType;
 	}
 
-	public Set<Curs> getCurs() {
-		return curs;
+	public Set<UserCurs> getUsercurs() {
+		return usercurs;
 	}
 
-	public void setCurs(Set<Curs> curs) {
-		this.curs = curs;
+	public void setUsercurs(Set<UserCurs> usercurs) {
+		this.usercurs = usercurs;
 	}
+
 	public User() {}
 	public User(String username, String email, String password) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-	}
-	public void add_curs(Curs cursuri) {
-		curs.add(cursuri);
-	}
-
-	@Override
-	public String toString() {
-		return "User [user_id=" + user_id + ", username=" + username + ", firstname=" + firstname + ", lastname="
-				+ lastname + ", password=" + password + ", email=" + email + ", userType=" + userType + ", curs=" + curs.size()
-				+ "]";
 	}
 
 	

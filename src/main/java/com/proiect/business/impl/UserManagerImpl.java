@@ -139,16 +139,16 @@ public class UserManagerImpl implements UserManager {
 		userDAO.insert(usert);
 		
 	}
-	public void updateDTO(String username, String denumire) {
-		StudProfDTO studProf = new StudProfDTO();
-		studProf.setUsername(username);
-		User prof = userDAO.getUserByUsername(denumire);
-		Set<Curs> cursuriprof = prof.getCurs();
-		String curs = cursuriprof.toString();
-		String[] arrOfStr = curs.split(",", 5);
-		String cursprof = arrOfStr[1];
-		cursprof = cursprof.substring(10);
-		studProf.setDenumire(cursprof);
-		userDAO.update(studProf);
-	}
+//	public void updateDTO(String username, String denumire) {
+//		StudProfDTO studProf = new StudProfDTO();
+//		studProf.setUsername(username);
+//		User prof = userDAO.getUserByUsername(denumire);
+//		Set<Curs> cursuriprof = prof.getCurs();
+//		String curs = cursuriprof.toString();
+//		String[] arrOfStr = curs.split(",", 5);
+//		String cursprof = arrOfStr[1];
+//		cursprof = cursprof.substring(10);
+//		studProf.setDenumire(cursprof);
+//		userDAO.update(studProf);
+//	}
 }

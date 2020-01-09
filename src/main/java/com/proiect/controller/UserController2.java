@@ -119,7 +119,7 @@ public class UserController2 {
 		catch(JSONException e) {
 			e.printStackTrace();
 			}
-		userManager.updateDTO(username, denumire);
+		//userManager.updateDTO(username, denumire);
 	}
 
 }

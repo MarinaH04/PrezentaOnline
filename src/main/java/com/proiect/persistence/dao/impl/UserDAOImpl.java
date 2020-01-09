@@ -55,19 +55,19 @@ public class UserDAOImpl implements UserDAO {
 		session.close();
 	}
 
-	public void update(StudProfDTO studprof) {
-		Session session = sessionFactory.openSession();
-		Transaction tx = session.beginTransaction();
-		User user = null;
-		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", studprof.getUsername())).uniqueResult();
-		Curs cursuri = null;
-		 cursuri = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", studprof.getDenumire())).uniqueResult();
-		Set<Curs> s = user.getCurs();
-		s.add(cursuri);
-		user.setCurs(s);
-		tx.commit();
-		session.close();
-	}
+//	public void update(StudProfDTO studprof) {
+//		Session session = sessionFactory.openSession();
+//		Transaction tx = session.beginTransaction();
+//		User user = null;
+//		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", studprof.getUsername())).uniqueResult();
+//		Curs cursuri = null;
+//		 cursuri = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", studprof.getDenumire())).uniqueResult();
+//		Set<Curs> s = user.getCurs();
+//		s.add(cursuri);
+//		user.setCurs(s);
+//		tx.commit();
+//		session.close();
+//	}
 	
 	public void edit(UserDTO userDTO) {
 		Session session = sessionFactory.openSession();

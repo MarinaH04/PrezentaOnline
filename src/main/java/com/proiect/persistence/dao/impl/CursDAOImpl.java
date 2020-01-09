@@ -20,8 +20,6 @@ import com.proiect.persistence.dao.CursDAO;
 import com.proiect.persistence.entity.Curs;
 
 
-
-
 @Repository
 @Transactional
 public class CursDAOImpl implements CursDAO{
