@@ -1,15 +1,10 @@
 package com.proiect.persistence.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -27,9 +22,7 @@ public class Curs implements java.io.Serializable {
 	@Column(name = "denumire")
 	private String denumire;
 
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.cs")
-	private Set<UserCurs> usercurs = new HashSet<UserCurs>();
+
 
 	public Curs() {
 	}
@@ -54,20 +47,6 @@ public class Curs implements java.io.Serializable {
 
 	public void setDenumire(String denumire) {
 		this.denumire = denumire;
-	}
-
-	public Set<UserCurs> getUsercurs() {
-		return usercurs;
-	}
-
-
-	public void setUsercurs(Set<UserCurs> usercurs) {
-		this.usercurs = usercurs;
-	}
-
-	@Override
-	public String toString() {
-		return "Curs [curs_id=" + curs_id + ", denumire=" + denumire + ", usercurs=" + usercurs + "]";
 	}
 
 	

@@ -20,11 +20,13 @@ public class Prezenta{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_prezenta;
 	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@JoinColumn(name="uc_id")
+	private UserCurs usercurs;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
 	@JoinColumn(name="oc_id")
 	private OrarCurs orarcurs;
-	
 	
 	private Boolean Present;
 	
@@ -37,6 +39,13 @@ public class Prezenta{
 		this.id_prezenta = id_prezenta;
 	}
 
+	public UserCurs getUsercurs() {
+		return usercurs;
+	}
+
+	public void setUsercurs(UserCurs usercurs) {
+		this.usercurs = usercurs;
+	}
 
 	public OrarCurs getOrarcurs() {
 		return orarcurs;

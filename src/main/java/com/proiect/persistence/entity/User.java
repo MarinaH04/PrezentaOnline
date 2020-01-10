@@ -1,7 +1,5 @@
 package com.proiect.persistence.entity;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -47,9 +44,6 @@ public class User implements java.io.Serializable {
 	@JoinColumn(name="id")
 	private UserType userType;
 	
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user",cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-	private Set<UserCurs> usercurs = new HashSet<UserCurs>(); 
 	
 	public Integer getUser_id() {
 		return user_id;
@@ -109,13 +103,6 @@ public class User implements java.io.Serializable {
 		this.userType = userType;
 	}
 
-	public Set<UserCurs> getUsercurs() {
-		return usercurs;
-	}
-
-	public void setUsercurs(Set<UserCurs> usercurs) {
-		this.usercurs = usercurs;
-	}
 
 	public User() {}
 	public User(String username, String email, String password) {

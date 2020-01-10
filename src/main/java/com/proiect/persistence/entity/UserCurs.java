@@ -1,55 +1,35 @@
 package com.proiect.persistence.entity;
 
-//import java.beans.Transient;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="user_curs")
-@AssociationOverrides({
-	@AssociationOverride(name="pk.user", joinColumns = @JoinColumn(name="id_user")),
-	@AssociationOverride(name="pk.cs", joinColumns = @JoinColumn(name="id_curs"))
-})
-public class UserCurs implements java.io.Serializable {
-
-	private static final long serialVersionUID = 4050660680047579957L;
-	
-	private UserCursID pk = new UserCursID();
+public class UserCurs {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="uc_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer uc_id;
 	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@JoinColumn(name="user_id")
+	private User user;
 	
-//	@Transient
-//	public User getUser() {
-//		return getPk().getUser();
-//	}
-//	
-//	public void setUser(User user) {
-//		getPk().setUser(user);
-//	}
-//	
-//	@Transient
-//	public Curs getCs() {
-//		return getPk().getCs();
-//	}
-//	
-//	
-//	public void setCs(Curs c) {
-//		getPk().setCs(c);
-//	}
-	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@JoinColumn(name="curs_id")
+	private Curs curs;
+
 	public Integer getUc_id() {
 		return uc_id;
 	}
@@ -57,13 +37,22 @@ public class UserCurs implements java.io.Serializable {
 	public void setUc_id(Integer uc_id) {
 		this.uc_id = uc_id;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Curs getCurs() {
+		return curs;
+	}
+
+	public void setCurs(Curs curs) {
+		this.curs = curs;
+	}
 	
-	@EmbeddedId
-	public UserCursID getPk() {
-		return pk;
-	}
-	public void setPk(UserCursID pk) {
-		this.pk = pk;
-	}
 
 }
