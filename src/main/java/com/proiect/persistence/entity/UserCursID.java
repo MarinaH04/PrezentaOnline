@@ -1,9 +1,15 @@
 package com.proiect.persistence.entity;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Embeddable;
 
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+
 
 @Embeddable
 public class UserCursID implements java.io.Serializable {
@@ -13,7 +19,6 @@ public class UserCursID implements java.io.Serializable {
 	
 	private User user;
 	private Curs cs;
-	
 	
 	@ManyToOne
 	public User getUser() {

@@ -48,7 +48,7 @@ public class User implements java.io.Serializable {
 	private UserType userType;
 	
 	
-	@OneToMany(fetch = FetchType.LAZY,mappedBy = "pk.user",cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.user",cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
 	private Set<UserCurs> usercurs = new HashSet<UserCurs>(); 
 	
 	public Integer getUser_id() {

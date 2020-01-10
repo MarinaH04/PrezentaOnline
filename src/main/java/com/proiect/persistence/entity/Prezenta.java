@@ -1,28 +1,49 @@
 package com.proiect.persistence.entity;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.EmbeddedId;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="prezenta")
-@AssociationOverrides({
-	@AssociationOverride(name="pk1.usercurs", joinColumns = @JoinColumn(name="id_usercurs", referencedColumnName="usercurs_id")),
-	@AssociationOverride(name="pk1.orar", joinColumns = @JoinColumn(name="id_orar", referencedColumnName="oc_id"))
-})
-public class Prezenta implements java.io.Serializable{
-
-	private static final long serialVersionUID = 4050660680047579957L;
+public class Prezenta{
 	
-	private PrezentaID pk1 = new PrezentaID();
+	@Id
+	@Column(name = "id_prezenta")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id_prezenta;
+	
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@JoinColumn(name="oc_id")
+	private OrarCurs orarcurs;
+	
+	
 	private Boolean Present;
 	
-	@EmbeddedId
-	public PrezentaID getPk1() {
-		return pk1;
+	
+	public Integer getId_prezenta() {
+		return id_prezenta;
+	}
+
+	public void setId_prezenta(Integer id_prezenta) {
+		this.id_prezenta = id_prezenta;
+	}
+
+
+	public OrarCurs getOrarcurs() {
+		return orarcurs;
+	}
+
+	public void setOrarcurs(OrarCurs orarcurs) {
+		this.orarcurs = orarcurs;
 	}
 
 	public Boolean getPresent() {
@@ -31,11 +52,6 @@ public class Prezenta implements java.io.Serializable{
 
 	public void setPresent(Boolean present) {
 		Present = present;
-	}
-
-	public void setPk1(PrezentaID pk1) {
-		this.pk1 = pk1;
-	}
-	
+	}	
 	
 }

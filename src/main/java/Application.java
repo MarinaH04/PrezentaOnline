@@ -24,7 +24,7 @@ public class Application {
 		UserDAO userDAO = appContext.getBean(UserDAO.class);
 		UserTypeDAO usertDAO = appContext.getBean(UserTypeDAO.class);
 		CursDAO cursDAO = appContext.getBean(CursDAO.class);
-//	usertDAO.insert("Profesor");
+//	usertDAO.insert("Admin");
 //	userDAO.insert("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
 //	cursDAO.insert(2,"Mate");
 //	userDAO.update("ManiutiuR","Economie");
