@@ -55,19 +55,7 @@ public class UserDAOImpl implements UserDAO {
 		session.close();
 	}
 
-//	public void update(StudProfDTO studprof) {
-//		Session session = sessionFactory.openSession();
-//		Transaction tx = session.beginTransaction();
-//		User user = null;
-//		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", studprof.getUsername())).uniqueResult();
-//		Curs cursuri = null;
-//		 cursuri = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", studprof.getDenumire())).uniqueResult();
-//		Set<Curs> s = user.getCurs();
-//		s.add(cursuri);
-//		user.setCurs(s);
-//		tx.commit();
-//		session.close();
-//	}
+	
 	
 	public void edit(UserDTO userDTO) {
 		Session session = sessionFactory.openSession();
@@ -116,16 +104,6 @@ public class UserDAOImpl implements UserDAO {
 
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	public List<User> displayStudents(){
-//		Session session = this.sessionFactory.openSession();
-//		List<User> result = null;
-//		try {
-//			result = session.createQuery("").list();
-//		} catch (Exception e) {
-//		}
-//		return null;
-//	}
 
 	public void deleteUser(Integer user_id) {
 		Session session = sessionFactory.openSession();
@@ -139,13 +117,6 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println("Deleted Successfully");
 	}
 
-	public void saveObj(Object object) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.saveOrUpdate(object);
-		session.getTransaction().commit();
-		session.close();
-	}
 	
 	@SuppressWarnings("unchecked")
 	public Set<Curs> getCourses(int uid){
@@ -159,6 +130,13 @@ public class UserDAOImpl implements UserDAO {
 			System.out.println("Exception in get courses: "+ e.getMessage());
 		}
 		return user_curs;
+	}
+	public List<Curs> getCursUser(String username){
+		Session session = sessionFactory.openSession();
+		User userc = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
+		Integer id_userc = userc.getUser_id();
+		Query q = session.createQuery("");
+		return null;
 	}
 	
 	
