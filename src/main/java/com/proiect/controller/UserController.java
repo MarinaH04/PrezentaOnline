@@ -21,7 +21,7 @@ import com.proiect.business.UserManager;
 
 
 @Path("/userDTO")
-public class UserController2 {
+public class UserController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-dto.xml");
 	UserManager userManager = context.getBean(UserManager.class);
 

@@ -1,5 +1,7 @@
 package com.proiect.persistence.dao.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
@@ -28,8 +30,31 @@ public class UserCursDAOImpl implements UserCursDAO {
 		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
 		Curs curs = null;
 		curs = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", denumire)).uniqueResult();
-		Integer curs_id = curs.getCurs_id();
-		Integer user_id = user.getUser_id();
 		UserCurs usercurs = new UserCurs();
+		List<UserCurs> result = null;
+		try {
+
+			result = session.createQuery("FROM UserCurs").list();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		int i = 0;
+		for(UserCurs result_uc: result) {
+			if(result_uc.getUser().getUser_id() == user.getUser_id()) {
+				if(result_uc.getCurs().getCurs_id() == curs.getCurs_id()) {
+					System.out.println("User si curs deja existenti!!!");
+					i++;
+				}
+
+			}
+		}
+		if(i==0) {
+			usercurs.setUser(user);
+			usercurs.setCurs(curs);
+			session.save(usercurs);
+			tx.commit();	
+		}
+		
+
 	}
 }

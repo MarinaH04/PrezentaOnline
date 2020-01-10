@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.proiect.business.impl.UserManagerImpl;
 import com.proiect.persistence.dao.CursDAO;
+import com.proiect.persistence.dao.UserCursDAO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.dao.UserTypeDAO;
 
@@ -23,8 +24,11 @@ public class Application {
 		final ApplicationContext appContext = new ClassPathXmlApplicationContext("spring.xml");
 		UserDAO userDAO = appContext.getBean(UserDAO.class);
 		UserTypeDAO usertDAO = appContext.getBean(UserTypeDAO.class);
+		UserCursDAO usercursDAO = appContext.getBean(UserCursDAO.class);
 		CursDAO cursDAO = appContext.getBean(CursDAO.class);
-	usertDAO.insert("Profesor");
+		
+		usercursDAO.update("Marina04", "Matematica");
+//	usertDAO.insert("Profesor");
 //	userDAO.insert("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
 //	cursDAO.insert(2,"Mate");
 //	userDAO.update("ManiutiuR","Economie");
