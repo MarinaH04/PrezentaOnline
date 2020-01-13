@@ -23,6 +23,7 @@ import com.commons.UserInsertDTO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
+import com.proiect.persistence.entity.UserCurs;
 import com.proiect.persistence.entity.UserType;
 
 @Repository
@@ -104,14 +105,27 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 
-	public void deleteUser(Integer user_id) {
+	public void deleteUser(UserDTO userDTO) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
-		User user = (User) session.load(User.class, user_id);
-
+		String username = userDTO.getUsername();
+		User user = null;
+		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
+		Query q = session.createQuery("Select uc FROM UserCurs uc JOIN uc.user u WHERE u.username=:username");
+		q.setParameter("username", username);
+		List<UserCurs> uc = new ArrayList<UserCurs>();
+		try {
+			uc.addAll(q.list());
+		} catch (Exception e) {
+		}
+		for(UserCurs usercurs:uc) {
+			session.delete(usercurs);
+		}
+		
 		session.delete(user);
-
 		session.getTransaction().commit();
+
+		
 
 		System.out.println("Deleted Successfully");
 	}

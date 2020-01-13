@@ -20,4 +20,5 @@ public interface UserManager {
 	public CursUserDTO getCursUser(String denumire);
 	public void updateDTO(String username, String denumire);
 	public void editDTO(String username, String firstname, String lastname, String email, String password);
+	public void deleteDTO(String username);
 }

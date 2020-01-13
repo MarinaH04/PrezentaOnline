@@ -100,6 +100,22 @@ public class UserController {
 		}
 		userManager.editDTO(username, firstname, lastname, email, password);
 	}
+	
+	@POST
+	@Path("/delete")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void delete(String str) {
+		JSONObject jsonObj;
+		String username = "";
+		
+		try {
+			jsonObj = new JSONObject(str);
+			username = jsonObj.getString("username");
+		} catch (Exception e) {
+		}
+		userManager.deleteDTO(username);
+	}
+	
 
 	@POST
 	@Path("/insert")

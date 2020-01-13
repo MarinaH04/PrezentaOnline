@@ -28,16 +28,18 @@ public class Application {
 		UserCursDAO usercursDAO = appContext.getBean(UserCursDAO.class);
 		CursDAO cursDAO = appContext.getBean(CursDAO.class);
 		
+//		userDAO.deleteUser("Marina04");
+		
 		final ApplicationContext appContextbussiness = new ClassPathXmlApplicationContext("spring-dto.xml");
 		UserManager usMang = appContextbussiness.getBean(UserManager.class);
 //		System.out.println(userDAO.getCursUser("Marina04"));
-		System.out.println(cursDAO.getUsersbyCourse("Matematica"));
+//		System.out.println(cursDAO.getUsersbyCourse("Matematica"));
 //		usMang.insertDTO("AndreB", "Andreea", "Barbu", "andreb@gmail.com", "1234", "Student");
 //		usMang.updateDTO("AndreB", "MorariuP");
 //		System.out.println(usMang.getCursUser("Economie"));
 //		System.out.println(usMang.getUserCurs("AndreB"));
-		
-		usMang.editDTO("Marina04", "Marina", "Hanzu", "hanzumarina@yahoo.com", "1234");
+		usMang.deleteDTO("Marina04");
+//		usMang.editDTO("Marina04", "Marina", "Hanzu", "hanzumarina@yahoo.com", "1234");
 		
 //	usertDAO.insert("Profesor");
 //	userDAO.insert("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");

@@ -3,7 +3,6 @@ package com.proiect.business.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -79,6 +78,12 @@ public class UserManagerImpl implements UserManager {
 		usert.setEmail(email);
 		usert.setPassword(password);
 		userDAO.edit(usert);
+	}
+	
+	public void deleteDTO(String username) {
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUsername(username);
+		userDAO.deleteUser(userDTO);
 	}
 	
 	public CursDTO getCurs(String denumire){

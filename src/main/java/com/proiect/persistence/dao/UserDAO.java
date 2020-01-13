@@ -14,7 +14,7 @@ public interface UserDAO {
 	
 	public List<User> displayUsers();
 	public List<User> displayStudents(String tip);
-	public void deleteUser(Integer user_id);
+	public void deleteUser(UserDTO userDTO);
 	public User getUserByUsername(String username);
 	public Set<Curs> getCourses(int uid);
 	public User login(String username, String password);
