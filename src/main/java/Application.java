@@ -26,11 +26,14 @@ public class Application {
 		UserTypeDAO usertDAO = appContext.getBean(UserTypeDAO.class);
 		UserCursDAO usercursDAO = appContext.getBean(UserCursDAO.class);
 		CursDAO cursDAO = appContext.getBean(CursDAO.class);
+
+		userDAO.getCursUser("Marina04");
+		cursDAO.getUsersbyCourse("Matematica");
 		
-		usercursDAO.update("Marina04", "Matematica");
+//		usercursDAO.update("Marina04", "Engleza");
 //	usertDAO.insert("Profesor");
 //	userDAO.insert("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
-//	cursDAO.insert(2,"Mate");
+//	cursDAO.insert(3,"Engleza");
 //	userDAO.update("ManiutiuR","Economie");
 
 //		try {

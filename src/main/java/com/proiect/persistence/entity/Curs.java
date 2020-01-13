@@ -49,5 +49,10 @@ public class Curs implements java.io.Serializable {
 		this.denumire = denumire;
 	}
 
+	@Override
+	public String toString() {
+		return "Curs [curs_id=" + curs_id + ", denumire=" + denumire + "]";
+	}
+
 	
 }

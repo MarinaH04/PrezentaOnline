@@ -111,6 +111,13 @@ public class User implements java.io.Serializable {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", username=" + username + ", firstname=" + firstname + ", lastname="
+				+ lastname + ", password=" + password + ", email=" + email + ", userType=" + userType + "]";
+	}
+	
+	
 	
 	
 }

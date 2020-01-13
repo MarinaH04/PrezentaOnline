@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 
 import org.hibernate.Query;
 
-import com.commons.StudProfDTO;
 import com.commons.UserCursDTO;
 import com.commons.UserDTO;
 import com.commons.UserInsertDTO;
@@ -131,12 +130,33 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return user_curs;
 	}
-	public List<Curs> getCursUser(String username){
+
+	@SuppressWarnings("unchecked")
+	public void getCursUser(String username){
 		Session session = sessionFactory.openSession();
-		User userc = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
-		Integer id_userc = userc.getUser_id();
-		Query q = session.createQuery("");
-		return null;
+		
+		Query q = session.createQuery("SELECT c FROM UserCurs uct inner JOIN uct.curs c WHERE uct = (SELECT uc from UserCurs uc JOIN uc.user u WHERE u.username = :username)");
+		q.setParameter("username", username);
+		List<Curs> courseuser = new ArrayList<Curs>();
+		try {
+			courseuser.addAll(q.list());
+		}
+		catch(Exception ex1) {
+			
+		}
+//		System.out.println(courseuser);
+		
+		Query q1 = session.createQuery("SELECT c FROM UserCurs uc, Curs c INNER JOIN uc.user u INNER JOIN uc.curs ucc WHERE ucc=c and u.username=:username");
+		q1.setParameter("username", username);
+		List<Curs> courseuser1 = new ArrayList<Curs>();
+		try {
+			courseuser1.addAll(q1.list());
+		}
+		catch(Exception ex1) {
+			
+		}
+		System.out.println(courseuser1);
+		
 	}
 	
 	

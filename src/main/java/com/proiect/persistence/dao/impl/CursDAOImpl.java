@@ -2,6 +2,7 @@ package com.proiect.persistence.dao.impl;
 
 import com.proiect.persistence.entity.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,20 +26,13 @@ import com.proiect.persistence.entity.Curs;
 public class CursDAOImpl implements CursDAO{
 	@Autowired
 	public SessionFactory sessionFactory;
-	public void saveObj(Object object) {
-		Session session = sessionFactory.openSession();
-	    session.beginTransaction();
-	    session.saveOrUpdate(object);
-	    session.getTransaction().commit();
-	    session.close();
-	}
+
 	public void insert(Integer curs_id, String denumire) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		Curs curs = new Curs();
 		curs.setCurs_id(curs_id);
 		curs.setDenumire(denumire);
-		
 		session.save(curs);
 		tx.commit();
 		session.close();
@@ -79,6 +73,19 @@ public class CursDAOImpl implements CursDAO{
 			System.out.println("Exception in get courses: "+ e.getMessage());
 		}
 		return user_curs;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void getUsersbyCourse (String denumire) {
+		Session session = sessionFactory.openSession();
+		Query q = session.createQuery("SELECT u FROM UserCurs uc, User u INNER JOIN uc.curs c INNER JOIN uc.user ucc WHERE u=ucc and c.denumire=:denumire");
+		q.setParameter("denumire", denumire);
+		List<User> users = new ArrayList<User>();
+		try {
+			users.addAll(q.list());
+		} catch (Exception e) {
+		}
+		System.out.println(users);
 	}
 
 	
