@@ -132,7 +132,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void getCursUser(String username){
+	public List<Curs> getCursUser(String username){
 		Session session = sessionFactory.openSession();
 		
 		Query q = session.createQuery("SELECT c FROM UserCurs uct inner JOIN uct.curs c WHERE uct = (SELECT uc from UserCurs uc JOIN uc.user u WHERE u.username = :username)");
@@ -155,7 +155,7 @@ public class UserDAOImpl implements UserDAO {
 		catch(Exception ex1) {
 			
 		}
-		System.out.println(courseuser1);
+		return courseuser1;
 		
 	}
 	

@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.proiect.business.UserManager;
 import com.proiect.business.impl.UserManagerImpl;
 import com.proiect.persistence.dao.CursDAO;
 import com.proiect.persistence.dao.UserCursDAO;
@@ -26,11 +27,15 @@ public class Application {
 		UserTypeDAO usertDAO = appContext.getBean(UserTypeDAO.class);
 		UserCursDAO usercursDAO = appContext.getBean(UserCursDAO.class);
 		CursDAO cursDAO = appContext.getBean(CursDAO.class);
-
-		userDAO.getCursUser("Marina04");
-		cursDAO.getUsersbyCourse("Matematica");
 		
-//		usercursDAO.update("Marina04", "Engleza");
+		final ApplicationContext appContextbussiness = new ClassPathXmlApplicationContext("spring-dto.xml");
+		UserManager usMang = appContextbussiness.getBean(UserManager.class);
+		System.out.println(userDAO.getCursUser("Marina04"));
+		System.out.println(cursDAO.getUsersbyCourse("Matematica"));
+//		usMang.insertDTO("AndreB", "Andreea", "Barbu", "andreb@gmail.com", "1234", "Student");
+		usMang.updateDTO("AndreB", "MorariuP");
+		
+//		usercursDAO.update("MorariuP", "Economie");
 //	usertDAO.insert("Profesor");
 //	userDAO.insert("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
 //	cursDAO.insert(3,"Engleza");

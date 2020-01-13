@@ -76,7 +76,7 @@ public class CursDAOImpl implements CursDAO{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void getUsersbyCourse (String denumire) {
+	public List<User> getUsersbyCourse (String denumire) {
 		Session session = sessionFactory.openSession();
 		Query q = session.createQuery("SELECT u FROM UserCurs uc, User u INNER JOIN uc.curs c INNER JOIN uc.user ucc WHERE u=ucc and c.denumire=:denumire");
 		q.setParameter("denumire", denumire);
@@ -85,7 +85,7 @@ public class CursDAOImpl implements CursDAO{
 			users.addAll(q.list());
 		} catch (Exception e) {
 		}
-		System.out.println(users);
+		return users;
 	}
 
 	

@@ -13,6 +13,6 @@ public interface CursDAO {
 	public List<Curs> displayCursuri();
 	public Curs getCursByDenumire(String denumire);
 	public Set<User> getUsers(String course);
-	public void getUsersbyCourse (String denumire);
+	public List<User> getUsersbyCourse (String denumire);
 
 }

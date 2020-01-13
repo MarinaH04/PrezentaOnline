@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.hibernate.Session;
+
+import com.commons.StudProfDTO;
 import com.proiect.persistence.dao.UserCursDAO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
@@ -23,13 +25,15 @@ public class UserCursDAOImpl implements UserCursDAO {
 	@Autowired
 	public SessionFactory sessionFactory;
 	
-	public void update(String username, String denumire) {
+	public void update(StudProfDTO studprof) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		User user = null;
-		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
+		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", studprof.getUsername())).uniqueResult();
 		Curs curs = null;
-		curs = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", denumire)).uniqueResult();
+		System.out.println(studprof.getDenumire());
+		curs = (Curs) session.createCriteria(Curs.class).add(Restrictions.eq("denumire", studprof.getDenumire())).uniqueResult();
+		System.out.println(curs);
 		UserCurs usercurs = new UserCurs();
 		List<UserCurs> result = null;
 		try {

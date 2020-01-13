@@ -19,5 +19,5 @@ public interface UserDAO {
 	public void usercourse(String username);
 	public UserType getUserType(String username);
 	public void insert(UserInsertDTO userDTO);
-	public void getCursUser(String username);
+	public List<Curs> getCursUser(String username);
 }

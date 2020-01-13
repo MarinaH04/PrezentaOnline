@@ -18,6 +18,7 @@ import com.commons.UserInsertDTO;
 import com.commons.UserTypeDTO;
 import com.proiect.business.UserManager;
 import com.proiect.persistence.dao.CursDAO;
+import com.proiect.persistence.dao.UserCursDAO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.dao.UserTypeDAO;
 import com.proiect.persistence.entity.Curs;
@@ -31,7 +32,7 @@ public class UserManagerImpl implements UserManager {
 	UserDAO userDAO = appContext.getBean(UserDAO.class);
 	UserTypeDAO usertypeDAO = appContext.getBean(UserTypeDAO.class);
 	CursDAO cursDAO = appContext.getBean(CursDAO.class);
-	
+	UserCursDAO usercursDAO = appContext.getBean(UserCursDAO.class);
 	
 	
 	public UserDTO getUser(String username) {
@@ -139,16 +140,17 @@ public class UserManagerImpl implements UserManager {
 		userDAO.insert(usert);
 		
 	}
-//	public void updateDTO(String username, String denumire) {
-//		StudProfDTO studProf = new StudProfDTO();
-//		studProf.setUsername(username);
-//		User prof = userDAO.getUserByUsername(denumire);
-//		Set<Curs> cursuriprof = prof.getCurs();
-//		String curs = cursuriprof.toString();
-//		String[] arrOfStr = curs.split(",", 5);
-//		String cursprof = arrOfStr[1];
-//		cursprof = cursprof.substring(10);
-//		studProf.setDenumire(cursprof);
-//		userDAO.update(studProf);
-//	}
+	public void updateDTO(String username, String denumire) {
+		StudProfDTO studProf = new StudProfDTO();
+		studProf.setUsername(username);
+		User prof = userDAO.getUserByUsername(denumire);
+		List<Curs> cursuriprof = userDAO.getCursUser(prof.getUsername());
+		String curs = cursuriprof.toString();
+		String[] arrOfStr = curs.split(",", 5);
+		String cursprof = arrOfStr[1];
+		System.out.println(cursprof);
+		cursprof = cursprof.substring(10, cursprof.length()-2);
+		studProf.setDenumire(cursprof);
+		usercursDAO.update(studProf);
+	}
 }
