@@ -1,7 +1,6 @@
 package com.proiect.business.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import java.util.Set;
@@ -72,6 +71,15 @@ public class UserManagerImpl implements UserManager {
 		}
 		return usersDTO;
 	}
+	public void editDTO(String username, String firstname, String lastname, String email, String password) {
+		UserDTO usert = new UserDTO();
+		usert.setUsername(username);
+		usert.setFirstname(firstname);
+		usert.setLastname(lastname);
+		usert.setEmail(email);
+		usert.setPassword(password);
+		userDAO.edit(usert);
+	}
 	
 	public CursDTO getCurs(String denumire){
 		Curs curs = cursDAO.getCursByDenumire(denumire);
@@ -84,9 +92,8 @@ public class UserManagerImpl implements UserManager {
 		UserCursDTO usercurs = new UserCursDTO();
 		User user_username = userDAO.getUserByUsername(username);
 		usercurs.setUsername(user_username.getUsername());
-		Integer user_id = user_username.getUser_id();
-		Set<String> coursesDTO = new HashSet<String>();
-		Set<Curs> courses = userDAO.getCourses(user_id);
+		List<String> coursesDTO = new ArrayList<String>();
+		List<Curs> courses = userDAO.getCursUser(username);
 		for(Curs curs1:courses) {
 			String cursDTO = "";
 			cursDTO = curs1.getDenumire();
@@ -100,8 +107,8 @@ public class UserManagerImpl implements UserManager {
 		CursUserDTO cursuser = new CursUserDTO();
 		Curs curs = cursDAO.getCursByDenumire(denumire);
 		cursuser.setDenumire(curs.getDenumire());
-		Set<String> usersDTO = new HashSet<String>();
-		Set<User> users = cursDAO.getUsers(denumire);
+		List<String> usersDTO = new ArrayList<String>();
+		List<User> users = cursDAO.getUsersbyCourse(denumire);
 		for(User user1:users) {
 			String userDTO="";
 			userDTO = user1.getUsername();

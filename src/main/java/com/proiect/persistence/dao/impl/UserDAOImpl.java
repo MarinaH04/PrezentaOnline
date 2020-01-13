@@ -61,7 +61,7 @@ public class UserDAOImpl implements UserDAO {
 		Transaction tx = session.beginTransaction();
 		User user = null;
 		user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", userDTO.getUsername())).uniqueResult();
-		user.setFirstname(userDTO.getUsername());
+		user.setFirstname(userDTO.getFirstname());
 		user.setLastname(userDTO.getLastname());
 		user.setEmail(userDTO.getEmail());
 		user.setPassword(userDTO.getPassword());
@@ -135,27 +135,16 @@ public class UserDAOImpl implements UserDAO {
 	public List<Curs> getCursUser(String username){
 		Session session = sessionFactory.openSession();
 		
-		Query q = session.createQuery("SELECT c FROM UserCurs uct inner JOIN uct.curs c WHERE uct = (SELECT uc from UserCurs uc JOIN uc.user u WHERE u.username = :username)");
+		Query q = session.createQuery("SELECT c FROM UserCurs uc, Curs c INNER JOIN uc.user u INNER JOIN uc.curs ucc WHERE ucc=c and u.username=:username");
 		q.setParameter("username", username);
 		List<Curs> courseuser = new ArrayList<Curs>();
 		try {
 			courseuser.addAll(q.list());
 		}
-		catch(Exception ex1) {
-			
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
 		}
-//		System.out.println(courseuser);
-		
-		Query q1 = session.createQuery("SELECT c FROM UserCurs uc, Curs c INNER JOIN uc.user u INNER JOIN uc.curs ucc WHERE ucc=c and u.username=:username");
-		q1.setParameter("username", username);
-		List<Curs> courseuser1 = new ArrayList<Curs>();
-		try {
-			courseuser1.addAll(q1.list());
-		}
-		catch(Exception ex1) {
-			
-		}
-		return courseuser1;
+		return courseuser;
 		
 	}
 	
@@ -183,7 +172,7 @@ public class UserDAOImpl implements UserDAO {
 		UserCursDTO userDTO = new UserCursDTO();
 		userDTO.setUsername(username);
 		Set<String> courses2 = new HashSet<String>();
-		userDTO.setCourses(courses2);
+//		userDTO.setCourses(courses2);
 		
 	}
 	public UserType getUserType(String username) {

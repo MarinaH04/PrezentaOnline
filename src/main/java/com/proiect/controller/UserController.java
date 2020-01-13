@@ -15,7 +15,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.commons.UserCursDTO;
 import com.commons.UserDTO;
-import com.commons.UserInsertDTO;
 import com.commons.UserTypeDTO;
 import com.proiect.business.UserManager;
 
@@ -76,6 +75,31 @@ public class UserController {
 		return userManager.login(username, password);
 
 	}
+	
+	@POST
+	@Path("/edit")
+	@Produces(MediaType.APPLICATION_JSON)
+	public void edit(String str) {
+		JSONObject jsonObj;
+		String username = "";
+		String firstname = "";
+		String lastname = "";
+		String email = "";
+		String password = "";
+		
+		try {
+			jsonObj = new JSONObject(str);
+			username = jsonObj.getString("username");
+			firstname = jsonObj.getString("firstname");
+			lastname = jsonObj.getString("lastname");
+			email = jsonObj.getString("email");
+			password = jsonObj.getString("password");
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		userManager.editDTO(username, firstname, lastname, email, password);
+	}
 
 	@POST
 	@Path("/insert")
@@ -119,7 +143,7 @@ public class UserController {
 		catch(JSONException e) {
 			e.printStackTrace();
 			}
-		//userManager.updateDTO(username, denumire);
+		userManager.updateDTO(username, denumire);
 	}
 
 }

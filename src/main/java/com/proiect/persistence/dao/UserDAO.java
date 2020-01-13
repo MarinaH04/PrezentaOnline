@@ -2,6 +2,8 @@ package com.proiect.persistence.dao;
 
 import java.util.List;
 import java.util.Set;
+
+import com.commons.UserDTO;
 import com.commons.UserInsertDTO;
 import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
@@ -19,5 +21,6 @@ public interface UserDAO {
 	public void usercourse(String username);
 	public UserType getUserType(String username);
 	public void insert(UserInsertDTO userDTO);
+	public void edit(UserDTO userDTO);
 	public List<Curs> getCursUser(String username);
 }

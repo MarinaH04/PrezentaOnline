@@ -3,9 +3,7 @@ package com.proiect.persistence.dao.impl;
 import com.proiect.persistence.entity.User;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -61,19 +59,6 @@ public class CursDAOImpl implements CursDAO{
 		return curs;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public Set<User> getUsers(String course){
-		Session session = sessionFactory.openSession();
-		Set<User> user_curs = new HashSet<>();
-		Query q = session.createQuery("SELECT u FROM Curs c JOIN c.user u WHERE c.denumire=:course");
-		q.setParameter("course", course);
-		try {
-			user_curs.addAll(q.list());
-		} catch (Exception e) {
-			System.out.println("Exception in get courses: "+ e.getMessage());
-		}
-		return user_curs;
-	}
 	
 	@SuppressWarnings("unchecked")
 	public List<User> getUsersbyCourse (String denumire) {

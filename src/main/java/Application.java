@@ -30,12 +30,15 @@ public class Application {
 		
 		final ApplicationContext appContextbussiness = new ClassPathXmlApplicationContext("spring-dto.xml");
 		UserManager usMang = appContextbussiness.getBean(UserManager.class);
-		System.out.println(userDAO.getCursUser("Marina04"));
+//		System.out.println(userDAO.getCursUser("Marina04"));
 		System.out.println(cursDAO.getUsersbyCourse("Matematica"));
 //		usMang.insertDTO("AndreB", "Andreea", "Barbu", "andreb@gmail.com", "1234", "Student");
-		usMang.updateDTO("AndreB", "MorariuP");
+//		usMang.updateDTO("AndreB", "MorariuP");
+//		System.out.println(usMang.getCursUser("Economie"));
+//		System.out.println(usMang.getUserCurs("AndreB"));
 		
-//		usercursDAO.update("MorariuP", "Economie");
+		usMang.editDTO("Marina04", "Marina", "Hanzu", "hanzumarina@yahoo.com", "1234");
+		
 //	usertDAO.insert("Profesor");
 //	userDAO.insert("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
 //	cursDAO.insert(3,"Engleza");
