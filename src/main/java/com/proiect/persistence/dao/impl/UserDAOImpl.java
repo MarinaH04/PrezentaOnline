@@ -38,16 +38,28 @@ public class UserDAOImpl implements UserDAO {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
 		User user = new User();
+		String username = userDTO.getUsername();
 		user.setUsername(userDTO.getUsername());
 		user.setFirstname(userDTO.getFirstname());
 		user.setLastname(userDTO.getLastname());
 		user.setEmail(userDTO.getEmail());
 		user.setPassword(userDTO.getPassword());
+		Query q1 = sessionFactory.getCurrentSession().createQuery("FROM User WHERE username=:username");
+		q1.setParameter("username", username);
+		List<User> result = null;
+		try {
+
+			result.addAll(q1.list());
+			
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+		System.out.println(result);
 		UserType usert = null;
 		Query q = sessionFactory.getCurrentSession().createQuery("FROM UserType WHERE tip=:tip");
 		q.setParameter("tip", userDTO.getTip());
 		usert = (UserType) q.uniqueResult();
-		if (usert != null) {
+		if (usert != null && result == null) {
 			user.setUserType(usert);
 			session.save(user);
 			tx.commit();
@@ -105,6 +117,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	public void deleteUser(UserDTO userDTO) {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();

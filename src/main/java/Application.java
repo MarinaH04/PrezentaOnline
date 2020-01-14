@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.proiect.business.UserManager;
 import com.proiect.business.impl.UserManagerImpl;
 import com.proiect.persistence.dao.CursDAO;
+import com.proiect.persistence.dao.PrezentaDAO;
 import com.proiect.persistence.dao.UserCursDAO;
 import com.proiect.persistence.dao.UserDAO;
 import com.proiect.persistence.dao.UserTypeDAO;
@@ -16,10 +17,14 @@ import com.proiect.persistence.entity.Curs;
 import com.proiect.persistence.entity.User;
 import com.proiect.persistence.entity.UserType;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 
 public class Application {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 	
 		@SuppressWarnings("resource")
 		final ApplicationContext appContext = new ClassPathXmlApplicationContext("spring.xml");
@@ -27,8 +32,14 @@ public class Application {
 		UserTypeDAO usertDAO = appContext.getBean(UserTypeDAO.class);
 		UserCursDAO usercursDAO = appContext.getBean(UserCursDAO.class);
 		CursDAO cursDAO = appContext.getBean(CursDAO.class);
+		PrezentaDAO prezentaDAO = appContext.getBean(PrezentaDAO.class);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date myDate = sdf.parse("2019-07-26");
 		
-//		userDAO.deleteUser("Marina04");
+
+		prezentaDAO.insert("Marina04", "Matematica", myDate, true);
+		
 		
 		final ApplicationContext appContextbussiness = new ClassPathXmlApplicationContext("spring-dto.xml");
 		UserManager usMang = appContextbussiness.getBean(UserManager.class);
@@ -38,12 +49,12 @@ public class Application {
 //		usMang.updateDTO("AndreB", "MorariuP");
 //		System.out.println(usMang.getCursUser("Economie"));
 //		System.out.println(usMang.getUserCurs("AndreB"));
-		usMang.deleteDTO("Marina04");
+//		usMang.deleteDTO("Marina04");
 //		usMang.editDTO("Marina04", "Marina", "Hanzu", "hanzumarina@yahoo.com", "1234");
 		
 //	usertDAO.insert("Profesor");
 //	userDAO.insert("RaveH","Raveca","Halmaghi", "raveh@yahoo.com", "1234", "Admin");
-//	cursDAO.insert(3,"Engleza");
+//	cursDAO.insert(1,"Economie");
 //	userDAO.update("ManiutiuR","Economie");
 
 //		try {

@@ -53,6 +53,11 @@ public class UserCurs {
 	public void setCurs(Curs curs) {
 		this.curs = curs;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "UserCurs [uc_id=" + uc_id + ", user=" + user + ", curs=" + curs + "]";
+	}
+	
+	
 }

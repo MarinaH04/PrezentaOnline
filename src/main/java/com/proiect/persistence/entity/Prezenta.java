@@ -1,5 +1,7 @@
 package com.proiect.persistence.entity;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,9 +26,7 @@ public class Prezenta{
 	@JoinColumn(name="uc_id")
 	private UserCurs usercurs;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-	@JoinColumn(name="oc_id")
-	private OrarCurs orarcurs;
+	private Date date;
 	
 	private Boolean Present;
 	
@@ -47,12 +47,12 @@ public class Prezenta{
 		this.usercurs = usercurs;
 	}
 
-	public OrarCurs getOrarcurs() {
-		return orarcurs;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setOrarcurs(OrarCurs orarcurs) {
-		this.orarcurs = orarcurs;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public Boolean getPresent() {
