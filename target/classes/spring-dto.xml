@@ -12,4 +12,5 @@ http://www.springframework.org/schema/tx
 http://www.springframework.org/schema/tx/spring-tx-4.3.xsd ">
 
 <bean id="userManager" class="com.proiect.business.impl.UserManagerImpl" />
+<bean id="prezentaManager" class="com.proiect.business.impl.PrezentaManagerImpl" />
 </beans>

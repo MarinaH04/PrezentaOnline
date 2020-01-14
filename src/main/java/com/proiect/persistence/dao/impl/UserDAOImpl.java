@@ -95,6 +95,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return result;
 	}
+	
 	@SuppressWarnings("unchecked")
 	public List<User> displayStudents(String tip){
 		Session session = this.sessionFactory.openSession();
