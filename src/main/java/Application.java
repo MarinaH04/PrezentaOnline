@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.proiect.business.PrezentaManager;
 import com.proiect.business.UserManager;
 import com.proiect.business.impl.UserManagerImpl;
+import com.proiect.business.impl.DateParser;
 import com.proiect.persistence.dao.CursDAO;
 import com.proiect.persistence.dao.PrezentaDAO;
 import com.proiect.persistence.dao.UserCursDAO;
@@ -36,15 +37,18 @@ public class Application {
 		PrezentaDAO prezentaDAO = appContext.getBean(PrezentaDAO.class);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date myDate = sdf.parse("2019-07-30");
+		Date myDate = sdf.parse("2019-07-20");
 		
-
+		String dataString = DateParser.toString(myDate);
+		
+		System.out.println(dataString);
+		Date newDate = DateParser.parse(dataString);
 		
 		
 		final ApplicationContext appContextbussiness = new ClassPathXmlApplicationContext("spring-dto.xml");
 		UserManager usMang = appContextbussiness.getBean(UserManager.class);
 		PrezentaManager prezManag = appContextbussiness.getBean(PrezentaManager.class);
-		prezManag.insert("AndreB", "Economie", false, myDate);
+		prezManag.insert("AndreB", "Economie", false, newDate);
 //		System.out.println(userDAO.getCursUser("Marina04"));
 //		System.out.println(cursDAO.getUsersbyCourse("Matematica"));
 //		usMang.insertDTO("AndreB", "Andreea", "Barbu", "andreb@gmail.com", "1234", "Student");
