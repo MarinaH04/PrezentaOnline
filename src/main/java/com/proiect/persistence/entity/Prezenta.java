@@ -61,6 +61,12 @@ public class Prezenta{
 
 	public void setPresent(Boolean present) {
 		Present = present;
+	}
+
+	@Override
+	public String toString() {
+		return "Prezenta [id_prezenta=" + id_prezenta + ", usercurs=" + usercurs + ", date=" + date + ", Present="
+				+ Present + "]";
 	}	
 	
 }

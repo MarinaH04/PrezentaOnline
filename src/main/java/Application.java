@@ -37,7 +37,7 @@ public class Application {
 		PrezentaDAO prezentaDAO = appContext.getBean(PrezentaDAO.class);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date myDate = sdf.parse("2019-07-20");
+		Date myDate = sdf.parse("2020-01-20");
 		
 		String dataString = DateParser.toString(myDate);
 		
@@ -48,7 +48,8 @@ public class Application {
 		final ApplicationContext appContextbussiness = new ClassPathXmlApplicationContext("spring-dto.xml");
 		UserManager usMang = appContextbussiness.getBean(UserManager.class);
 		PrezentaManager prezManag = appContextbussiness.getBean(PrezentaManager.class);
-		prezManag.insert("AndreB", "Economie", false, newDate);
+		prezentaDAO.display("Marina04", "Economie", myDate);	
+//		prezManag.insert("AndreB", "Economie", false, newDate);
 //		System.out.println(userDAO.getCursUser("Marina04"));
 //		System.out.println(cursDAO.getUsersbyCourse("Matematica"));
 //		usMang.insertDTO("AndreB", "Andreea", "Barbu", "andreb@gmail.com", "1234", "Student");

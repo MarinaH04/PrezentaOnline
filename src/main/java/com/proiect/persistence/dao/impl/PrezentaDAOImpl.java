@@ -1,6 +1,10 @@
 package com.proiect.persistence.dao.impl;
 
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -37,5 +41,20 @@ public class PrezentaDAOImpl implements PrezentaDAO {
 		prez.setPresent(prezentaDTO.getPresent());
 		session.save(prez);
 		tx.commit();
+	}
+	
+	public void display(String username, String denumire, Date date) {
+		Session session = sessionFactory.openSession();
+		UserCurs usercurs = new UserCurs();
+		Query q = session.createQuery("SELECT uc FROM UserCurs uc JOIN uc.user u JOIN uc.curs c WHERE u.username=:username AND c.denumire = :denumire");
+		q.setParameter("username", username);
+		q.setParameter("denumire", denumire);
+		usercurs = (UserCurs) q.uniqueResult();
+		Query q1 = session.createQuery("Select p from Prezenta p WHERE p.usercurs = :usercurs AND p.date = :date");
+		q1.setParameter("usercurs", usercurs);
+		q1.setParameter("date", date);
+		Prezenta prez = new Prezenta();
+		prez = (Prezenta)q1.uniqueResult();
+		System.out.println(prez);
 	}
 }
