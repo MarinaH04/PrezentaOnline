@@ -7,5 +7,5 @@ import com.commons.PrezentaDTO;
 
 public interface PrezentaDAO {
 	public void insert(PrezentaDTO prezentaDTO);
-	public void display(String username, String denumire, Date date);
+	public Boolean display(String username, String denumire, Date date);
 }

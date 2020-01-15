@@ -48,7 +48,7 @@ public class Application {
 		final ApplicationContext appContextbussiness = new ClassPathXmlApplicationContext("spring-dto.xml");
 		UserManager usMang = appContextbussiness.getBean(UserManager.class);
 		PrezentaManager prezManag = appContextbussiness.getBean(PrezentaManager.class);
-		prezentaDAO.display("Marina04", "Economie", myDate);	
+		System.out.println(prezentaDAO.display("AndreB", "Economie", myDate));	
 //		prezManag.insert("AndreB", "Economie", false, newDate);
 //		System.out.println(userDAO.getCursUser("Marina04"));
 //		System.out.println(cursDAO.getUsersbyCourse("Matematica"));

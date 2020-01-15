@@ -43,7 +43,7 @@ public class PrezentaDAOImpl implements PrezentaDAO {
 		tx.commit();
 	}
 	
-	public void display(String username, String denumire, Date date) {
+	public Boolean display(String username, String denumire, Date date) {
 		Session session = sessionFactory.openSession();
 		UserCurs usercurs = new UserCurs();
 		Query q = session.createQuery("SELECT uc FROM UserCurs uc JOIN uc.user u JOIN uc.curs c WHERE u.username=:username AND c.denumire = :denumire");
@@ -55,6 +55,7 @@ public class PrezentaDAOImpl implements PrezentaDAO {
 		q1.setParameter("date", date);
 		Prezenta prez = new Prezenta();
 		prez = (Prezenta)q1.uniqueResult();
-		System.out.println(prez);
+		Boolean b = prez.getPresent();
+		return b;
 	}
 }
