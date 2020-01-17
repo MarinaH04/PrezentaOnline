@@ -30,5 +30,14 @@ public class PrezentaManagerImpl implements PrezentaManager{
 		prezentaDTO.setPresent(present);
 		prezentaDAO.insert(prezentaDTO);
 	}
-
+	
+	public PrezentaDTO present(String username, String denumire, Date date) {
+		Boolean b = prezentaDAO.display(username, denumire, date);
+		PrezentaDTO prezDTO = new PrezentaDTO();
+		prezDTO.setUsername(username);
+		prezDTO.setDenumire(denumire);
+		prezDTO.setDate(date);
+		prezDTO.setPresent(b);
+		return prezDTO;
+	}
 }
