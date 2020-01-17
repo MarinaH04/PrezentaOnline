@@ -160,7 +160,6 @@ public class UserManagerImpl implements UserManager {
 		String curs = cursuriprof.toString();
 		String[] arrOfStr = curs.split(",", 5);
 		String cursprof = arrOfStr[1];
-		System.out.println(cursprof);
 		cursprof = cursprof.substring(10, cursprof.length()-2);
 		studProf.setDenumire(cursprof);
 		usercursDAO.update(studProf);
