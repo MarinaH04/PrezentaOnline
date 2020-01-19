@@ -126,11 +126,13 @@ public class UserManagerImpl implements UserManager {
 	public UserDTO login(String username, String password) {
 		UserDTO userDTO = new UserDTO();
 		User user_login = userDAO.login(username, password);
+		if(user_login!=null) {
 		userDTO.setUsername(user_login.getUsername());
 		userDTO.setFirstname(user_login.getFirstname());
 		userDTO.setLastname(user_login.getLastname());
 		userDTO.setEmail(user_login.getEmail());
-		return userDTO;
+		return userDTO;}
+		else return null;
 	}
 	
 	public UserTypeDTO getUserTypeDTO(String username) {

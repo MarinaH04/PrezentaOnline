@@ -17,7 +17,6 @@ import org.springframework.stereotype.Repository;
 
 import org.hibernate.Query;
 
-import com.commons.UserCursDTO;
 import com.commons.UserDTO;
 import com.commons.UserInsertDTO;
 import com.proiect.persistence.dao.UserDAO;
@@ -180,29 +179,17 @@ public class UserDAOImpl implements UserDAO {
 	public User login(String username, String password) {
 		Session session = sessionFactory.openSession();
 		User user_login = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
-		User userlogin = new User();
 		if(user_login!=null) {
 			
 			if((user_login.getPassword()).equals(password)) {
-				userlogin = user_login;
+				return user_login;
 			}
-			else System.out.println("Parola incorecta");
+			return null;
 		}
-		else System.out.println("Username inexistent");	
-		
-		return userlogin;
+		else {	return null;  }
 	}
 	
-	public void usercourse(String username) {
-		Session session = sessionFactory.openSession();
-		@SuppressWarnings("unused")
-		User usercurs = (User) session.createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
-		UserCursDTO userDTO = new UserCursDTO();
-		userDTO.setUsername(username);
-		Set<String> courses2 = new HashSet<String>();
-//		userDTO.setCourses(courses2);
-		
-	}
+
 	public UserType getUserType(String username) {
 		Session session = sessionFactory.openSession();
 		UserType usert = null;

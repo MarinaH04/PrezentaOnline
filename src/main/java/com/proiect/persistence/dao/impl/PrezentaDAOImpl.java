@@ -1,9 +1,7 @@
 package com.proiect.persistence.dao.impl;
 
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -54,8 +52,14 @@ public class PrezentaDAOImpl implements PrezentaDAO {
 		q1.setParameter("usercurs", usercurs);
 		q1.setParameter("date", date);
 		Prezenta prez = new Prezenta();
-		prez = (Prezenta)q1.uniqueResult();
+		try {
+		prez = (Prezenta) q1.uniqueResult();
+		System.out.println("Prezenta este: "+prez);
+		System.out.println("data este" + date);
 		Boolean b = prez.getPresent();
-		return b;
+		return b;}
+		catch(Exception ex) {
+			return null;
+		}
 	}
 }

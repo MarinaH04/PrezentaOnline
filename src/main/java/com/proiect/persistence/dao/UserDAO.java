@@ -18,7 +18,6 @@ public interface UserDAO {
 	public User getUserByUsername(String username);
 	public Set<Curs> getCourses(int uid);
 	public User login(String username, String password);
-	public void usercourse(String username);
 	public UserType getUserType(String username);
 	public void insert(UserInsertDTO userDTO);
 	public void edit(UserDTO userDTO);
