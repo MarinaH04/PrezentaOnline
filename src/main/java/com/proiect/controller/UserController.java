@@ -16,6 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.commons.UserCursDTO;
 import com.commons.UserDTO;
 import com.commons.UserTypeDTO;
+import com.proiect.business.UserCursManager;
 import com.proiect.business.UserManager;
 
 
@@ -23,6 +24,7 @@ import com.proiect.business.UserManager;
 public class UserController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-dto.xml");
 	UserManager userManager = context.getBean(UserManager.class);
+	UserCursManager userCursManager = context.getBean(UserCursManager.class);
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -159,7 +161,7 @@ public class UserController {
 		catch(JSONException e) {
 			e.printStackTrace();
 			}
-		userManager.updateDTO(username, denumire);
+		userCursManager.updateDTO(username, denumire);
 	}
 
 }

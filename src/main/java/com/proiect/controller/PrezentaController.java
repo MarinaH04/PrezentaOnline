@@ -10,9 +10,10 @@ import javax.ws.rs.core.MediaType;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.business.logic.DateParser;
 import com.commons.PrezentaDTO;
 import com.proiect.business.PrezentaManager;
-import com.proiect.business.impl.DateParser;
+
 
 
 @Path("/prezentaDTO")

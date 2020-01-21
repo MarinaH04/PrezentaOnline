@@ -10,26 +10,26 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.commons.CursDTO;
 import com.commons.CursUserDTO;
-import com.proiect.business.UserManager;
+import com.proiect.business.CourseManager;
 
 
 @Path("/courseDTO")
 public class CursController {
 	ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-dto.xml");
-	UserManager userManag = context.getBean(UserManager.class);
+	CourseManager courseManag = context.getBean(CourseManager.class);
 	
 	@GET
 	@Path("/{denumire}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public CursDTO getCurs(@PathParam("denumire") String denumire){
-		return userManag.getCurs(denumire);
+		return courseManag.getCurs(denumire);
 	}
 	
 	@GET
 	@Path("/users/{denumire}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public CursUserDTO getUsers(@PathParam("denumire") String denumire) {
-		return userManag.getCursUser(denumire);
+		return courseManag.getCursUser(denumire);
 	}
 	
 }

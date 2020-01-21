@@ -7,9 +7,6 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.commons.CursDTO;
-import com.commons.CursUserDTO;
-import com.commons.StudProfDTO;
 import com.commons.UserCursDTO;
 import com.commons.UserDTO;
 import com.commons.UserInsertDTO;
@@ -86,12 +83,7 @@ public class UserManagerImpl implements UserManager {
 		userDAO.deleteUser(userDTO);
 	}
 	
-	public CursDTO getCurs(String denumire){
-		Curs curs = cursDAO.getCursByDenumire(denumire);
-		CursDTO cursDTO = new CursDTO();
-		cursDTO.setDenumire(curs.getDenumire());
-		return cursDTO;
-	}
+
 	
 	public UserCursDTO getUserCurs(String username) {
 		UserCursDTO usercurs = new UserCursDTO();
@@ -108,20 +100,7 @@ public class UserManagerImpl implements UserManager {
 		return usercurs;
 	}
 	
-	public CursUserDTO getCursUser(String denumire) {
-		CursUserDTO cursuser = new CursUserDTO();
-		Curs curs = cursDAO.getCursByDenumire(denumire);
-		cursuser.setDenumire(curs.getDenumire());
-		List<String> usersDTO = new ArrayList<String>();
-		List<User> users = cursDAO.getUsersbyCourse(denumire);
-		for(User user1:users) {
-			String userDTO="";
-			userDTO = user1.getUsername();
-			usersDTO.add(userDTO);
-		}
-		cursuser.setUsers(usersDTO);
-		return cursuser;
-	}
+
 	
 	public UserDTO login(String username, String password) {
 		UserDTO userDTO = new UserDTO();
@@ -154,16 +133,5 @@ public class UserManagerImpl implements UserManager {
 		userDAO.insert(usert);
 		
 	}
-	public void updateDTO(String username, String denumire) {
-		StudProfDTO studProf = new StudProfDTO();
-		studProf.setUsername(username);
-		User prof = userDAO.getUserByUsername(denumire);
-		List<Curs> cursuriprof = userDAO.getCursUser(prof.getUsername());
-		String curs = cursuriprof.toString();
-		String[] arrOfStr = curs.split(",", 5);
-		String cursprof = arrOfStr[1];
-		cursprof = cursprof.substring(10, cursprof.length()-2);
-		studProf.setDenumire(cursprof);
-		usercursDAO.update(studProf);
-	}
+
 }
