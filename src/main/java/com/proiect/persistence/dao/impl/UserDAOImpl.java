@@ -2,9 +2,7 @@ package com.proiect.persistence.dao.impl;
 
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -33,6 +31,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	public UserDAO userDAO;
 	
+	@SuppressWarnings("unchecked")
 	public void insert(UserInsertDTO userDTO) {
 		Session session = sessionFactory.openSession();
 		Transaction tx = session.beginTransaction();
@@ -45,7 +44,7 @@ public class UserDAOImpl implements UserDAO {
 		user.setPassword(userDTO.getPassword());
 		Query q1 = sessionFactory.getCurrentSession().createQuery("FROM User WHERE username=:username");
 		q1.setParameter("username", username);
-		List<User> result = null;
+		List<User> result = new ArrayList<User>();
 		try {
 
 			result.addAll(q1.list());
@@ -58,11 +57,10 @@ public class UserDAOImpl implements UserDAO {
 		Query q = sessionFactory.getCurrentSession().createQuery("FROM UserType WHERE tip=:tip");
 		q.setParameter("tip", userDTO.getTip());
 		usert = (UserType) q.uniqueResult();
-		if (usert != null && result == null) {
-			user.setUserType(usert);
-			session.save(user);
-			tx.commit();
-		}
+		user.setUserType(usert);
+		session.save(user);
+		tx.commit();
+
 		session.close();
 	}
 
@@ -143,20 +141,7 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println("Deleted Successfully");
 	}
 
-	
-	@SuppressWarnings("unchecked")
-	public Set<Curs> getCourses(int uid){
-		Session session = sessionFactory.openSession();
-		Set<Curs> user_curs = new HashSet<>();
-		Query q = session.createQuery("SELECT c FROM User u JOIN u.curs c WHERE u.user_id=:uid");
-		q.setParameter("uid", uid);
-		try {
-			user_curs.addAll(q.list());
-		} catch (Exception e) {
-			System.out.println("Exception in get courses: "+ e.getMessage());
-		}
-		return user_curs;
-	}
+
 
 	@SuppressWarnings("unchecked")
 	public List<Curs> getCursUser(String username){

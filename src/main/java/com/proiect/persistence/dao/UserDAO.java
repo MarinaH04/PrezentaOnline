@@ -1,7 +1,6 @@
 package com.proiect.persistence.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import com.commons.UserDTO;
 import com.commons.UserInsertDTO;
@@ -16,7 +15,6 @@ public interface UserDAO {
 	public List<User> displayStudents(String tip);
 	public void deleteUser(UserDTO userDTO);
 	public User getUserByUsername(String username);
-	public Set<Curs> getCourses(int uid);
 	public User login(String username, String password);
 	public UserType getUserType(String username);
 	public void insert(UserInsertDTO userDTO);
